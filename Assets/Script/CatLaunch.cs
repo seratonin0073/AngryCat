@@ -12,7 +12,7 @@ public class CatLaunch : MonoBehaviour
     private Camera mainCamera;
 
     private Vector2 startPosition;
-    private bool canDrag;
+    public static bool canDrag;
     private GameObject startPositionObject;
 
     void Awake()

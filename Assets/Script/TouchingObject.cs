@@ -27,6 +27,7 @@ public class TouchingObject : MonoBehaviour
         rb2d.angularVelocity = 0;
         rb2d.isKinematic = true;
         transform.position = spawnPoint.position;
+        Camera.main.GetComponent<CameraMove>().MoveToStartPosition();
         health -= damage;
         HPSlider.value = health;
         if(health <= 0)
@@ -50,8 +51,8 @@ public class TouchingObject : MonoBehaviour
         }
     }
 
-    private void OnBecameInvisible()
+    /*private void OnBecameInvisible()
     {
         Damage(0);
-    }
+    }*/
 }
