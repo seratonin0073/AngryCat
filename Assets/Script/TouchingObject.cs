@@ -50,9 +50,4 @@ public class TouchingObject : MonoBehaviour
             Debug.LogError("Spawn Point is empty!");
         }
     }
-
-    /*private void OnBecameInvisible()
-    {
-        Damage(0);
-    }*/
 }

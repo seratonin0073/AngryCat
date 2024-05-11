@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
-public class ResultComtroller : MonoBehaviour
+public class ResultController : MonoBehaviour
 {
-    [SerializeField] private int loadStars;///кількість зірок
+    private int loadStars;///кількість зірок
     [SerializeField] private float timeToThreeStart;
     [SerializeField] private float timeCofficient;
 
-    [SerializeField] private Text gameTimerText;
-    [SerializeField] private Text allTimeText;//текст в якому показується час за який пройдено рівень
-    [SerializeField] private Text starText;
+    [SerializeField] private TMP_Text gameTimerText;
+    [SerializeField] private TMP_Text allTimeText;//текст в якому показується час за який пройдено рівень
+    [SerializeField] private TMP_Text starText;
 
     [SerializeField] private GameObject gameInterface;
     [SerializeField] private GameObject resultPanel;
@@ -20,6 +21,11 @@ public class ResultComtroller : MonoBehaviour
 
     private float currentLevelTime;
 
+    void Start()
+    {
+        LoadResoult();
+        resultPanel.SetActive(false);
+    }
     private void Tick()
     {
         currentLevelTime += 0.1f;
@@ -77,5 +83,24 @@ public class ResultComtroller : MonoBehaviour
             interfaceButton[0].SetActive(true);
             interfaceButton[1].SetActive(false);
         }
+    }
+
+    public void Restart()
+    {
+        int levelIndedx = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(levelIndedx);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Continue()
+    {
+        int levelIndex = SceneManager.GetActiveScene().buildIndex;
+        int allLevels = SceneManager.sceneCountInBuildSettings;
+
+        if(levelIndex < allLevels)  SceneManager.LoadScene(levelIndex + 1);
     }
 }

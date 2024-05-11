@@ -6,11 +6,14 @@ public class CatLaunch : MonoBehaviour
 {
     [SerializeField] private float forceValue = 1f;
     [SerializeField] private float minSpeedToDrag = 1f;
-    [SerializeField] private GameObject startPositionPrefab;
+    [SerializeField] private GameObject startPointToDrag;
+    [SerializeField] private ResultController resoult;
 
     private Rigidbody2D rb2d;
     private Camera mainCamera;
+     
 
+    public static bool isNonVisible;
     private Vector2 startPosition;
     public static bool canDrag;
     private GameObject startPositionObject;
@@ -37,24 +40,31 @@ public class CatLaunch : MonoBehaviour
             rb2d.isKinematic = true;
             rb2d.velocity = Vector2.zero;
             startPosition = rb2d.position;
-            startPositionObject = Instantiate(startPositionPrefab, startPosition, Quaternion.identity);
+            startPositionObject = Instantiate(startPointToDrag, startPosition, Quaternion.identity);
+
+            /*resoult.StopTimer();
+            isNonVisible = false;*/
         }
     }
 
     //Викликається коли користувач клікнув по колойдеру та тримає курсор всередині колайдера
     private void OnMouseDrag()
     {
-        if(canDrag)
+        if(canDrag && !isNonVisible)
         {
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePosition;
+        }
+        else if(canDrag && isNonVisible)
+        {
+            transform.position = startPointToDrag.transform.position;
         }
     }
 
     //Викликається коли користувач відпустив кнопку миші
     private void OnMouseUp()
     {
-        if(canDrag)
+        if(canDrag && !isNonVisible)
         {
             Vector2 currentPosition = rb2d.position;
             Vector2 direction = startPosition - currentPosition;
@@ -62,6 +72,7 @@ public class CatLaunch : MonoBehaviour
             rb2d.AddForce(direction * forceValue, ForceMode2D.Impulse);
             canDrag = false;
             Destroy(startPositionObject);
+            resoult.StartTimer();
         }
     }
 
@@ -69,9 +80,15 @@ public class CatLaunch : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Finish"))
         {
+            resoult.StopTimer();
+            resoult.SaveResoult();
             Destroy(gameObject);
         }
     }
 
-    
+    private void OnBecameInvisible()
+    {
+        isNonVisible = true;
+    }
+
 }

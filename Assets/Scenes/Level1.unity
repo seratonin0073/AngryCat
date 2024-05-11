@@ -1730,7 +1730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1730634727}
-  - component: {fileID: 1730634726}
+  - component: {fileID: 1730634728}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1738,27 +1738,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1730634726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730634725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914ccb8f8cddcaa479e0bb8253b11340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadStars: 0
-  timeToThreeStart: 0
-  timeCofficient: 0
-  gameTimerText: {fileID: 0}
-  allTimeText: {fileID: 0}
-  starText: {fileID: 0}
-  gameInterface: {fileID: 0}
-  resultPanel: {fileID: 0}
-  interfaceButton: []
 --- !u!4 &1730634727
 Transform:
   m_ObjectHideFlags: 0
@@ -1774,6 +1753,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1730634728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730634725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914ccb8f8cddcaa479e0bb8253b11340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToThreeStart: 15
+  timeCofficient: 1.5
+  gameTimerText: {fileID: 284488063}
+  allTimeText: {fileID: 1528760605}
+  starText: {fileID: 68773497}
+  gameInterface: {fileID: 893913894}
+  resultPanel: {fileID: 497777595}
+  interfaceButton:
+  - {fileID: 1961007095}
+  - {fileID: 604002195}
 --- !u!1001 &1843930414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2321,9 +2322,17 @@ PrefabInstance:
       value: Mursik
       objectReference: {fileID: 0}
     - target: {fileID: 4301863124349759624, guid: b39170a75018df74dbe89733797ada03, type: 3}
+      propertyPath: resoult
+      value: 
+      objectReference: {fileID: 1730634728}
+    - target: {fileID: 4301863124349759624, guid: b39170a75018df74dbe89733797ada03, type: 3}
       propertyPath: minSpeedToDrag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4301863124349759624, guid: b39170a75018df74dbe89733797ada03, type: 3}
+      propertyPath: startPointToDrag
+      value: 
+      objectReference: {fileID: 7110369578304876001, guid: 1b2782404f743314cac17164d9eed6b4, type: 3}
     - target: {fileID: 8793299791987465072, guid: b39170a75018df74dbe89733797ada03, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.15
