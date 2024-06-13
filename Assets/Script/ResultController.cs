@@ -7,6 +7,8 @@ using TMPro;
 
 public class ResultController : MonoBehaviour
 {
+    public static ResultController Instance;
+
     private int loadStars;///кількість зірок
     [SerializeField] private float timeToThreeStart;
     [SerializeField] private float timeCofficient;
@@ -23,6 +25,7 @@ public class ResultController : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         LoadResoult();
         resultPanel.SetActive(false);
     }
@@ -102,5 +105,14 @@ public class ResultController : MonoBehaviour
         int allLevels = SceneManager.sceneCountInBuildSettings;
 
         if(levelIndex < allLevels)  SceneManager.LoadScene(levelIndex + 1);
+    }
+
+    public void AddTime(int time)
+    {
+        currentLevelTime += time;
+    }
+    public void RemoveTime(int time)
+    {
+        currentLevelTime -= time;
     }
 }

@@ -38,16 +38,50 @@ public class TouchingObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(spawnPoint != null)
+        if (spawnPoint != null)
         {
             if (collision.gameObject.CompareTag("Obstacle"))
             {
                 Damage(collision.GetComponent<ObstacleSettings>().damage);
             }
+            if (collision.CompareTag("GravityZone")) rb2d.gravityScale = -rb2d.gravityScale; 
+            if(collision.CompareTag("TimeRemover"))
+            {
+                ResultController.Instance.RemoveTime(10);
+                Destroy(collision.gameObject);
+            }
+            if (collision.CompareTag("AddTime"))
+            {
+                ResultController.Instance.AddTime(10);
+                Destroy(collision.gameObject);
+            }
+            if(collision.CompareTag("AID"))
+            {
+                if(health < HPSlider.maxValue)
+                {
+                    health += 20;
+                    if (health > HPSlider.maxValue)
+                    {
+                        health = (int)HPSlider.maxValue;
+                    }
+                }
+            }
         }
         else
         {
             Debug.LogError("Spawn Point is empty!");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("GravityZone"))
+        {
+            Vector2 dir = rb2d.velocity;
+            dir.y = 0;
+            rb2d.velocity = dir;
+            rb2d.gravityScale = -rb2d.gravityScale;
+            Debug.Log("Change gravity! Exit!");
         }
     }
 }
