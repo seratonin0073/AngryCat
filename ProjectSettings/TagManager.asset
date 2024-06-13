@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Obstacle
   - GravityZone
+  - TimeRemover
+  - AddTime
+  - AID
   layers:
   - Default
   - TransparentFX
