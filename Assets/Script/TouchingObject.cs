@@ -23,6 +23,7 @@ public class TouchingObject : MonoBehaviour
 
     void Damage(int damage)
     {
+        AudioManager.instance.PlayPlayerDeath();
         rb2d.velocity = Vector2.zero;
         rb2d.angularVelocity = 0;
         rb2d.isKinematic = true;
@@ -47,17 +48,20 @@ public class TouchingObject : MonoBehaviour
             if (collision.CompareTag("GravityZone")) rb2d.gravityScale = -rb2d.gravityScale; 
             if(collision.CompareTag("TimeRemover"))
             {
+                AudioManager.instance.PlayBonusCollected();
                 ResultController.Instance.RemoveTime(10);
                 Destroy(collision.gameObject);
             }
             if (collision.CompareTag("AddTime"))
             {
+                AudioManager.instance.PlayBonusCollected();
                 ResultController.Instance.AddTime(10);
                 Destroy(collision.gameObject);
             }
             if(collision.CompareTag("AID"))
             {
-                if(health < HPSlider.maxValue)
+                AudioManager.instance.PlayBonusCollected();
+                if (health < HPSlider.maxValue)
                 {
                     health += 20;
                     if (health > HPSlider.maxValue)

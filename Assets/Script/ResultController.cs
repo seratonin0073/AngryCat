@@ -9,7 +9,9 @@ public class ResultController : MonoBehaviour
 {
     public static ResultController Instance;
 
-    private int loadStars;///кількість зірок
+    private int loadStars;//кількість зірок
+    public static int currentOpenLevel = 1;//кількість пройдених рівнів
+
     [SerializeField] private float timeToThreeStart;
     [SerializeField] private float timeCofficient;
 
@@ -28,6 +30,11 @@ public class ResultController : MonoBehaviour
         Instance = this;
         LoadResoult();
         resultPanel.SetActive(false);
+        currentOpenLevel = PlayerPrefs.GetInt("OpenLevel");
+        if(currentOpenLevel == 0)
+        {
+            currentOpenLevel = 1;
+        }
     }
     private void Tick()
     {
@@ -72,6 +79,10 @@ public class ResultController : MonoBehaviour
         gameInterface.SetActive(false);
         allTimeText.text = string.Format("time: {0:N1} s", currentLevelTime);
 
+        
+        currentOpenLevel++;
+        PlayerPrefs.SetInt("OpenLevel", currentOpenLevel);
+
         if(stars >= loadStars)
         {
             int levelIndex = SceneManager.GetActiveScene().buildIndex;
@@ -114,5 +125,8 @@ public class ResultController : MonoBehaviour
     public void RemoveTime(int time)
     {
         currentLevelTime -= time;
+        if (currentLevelTime < 0) currentLevelTime = 0;
     }
+
+    
 }

@@ -80,6 +80,7 @@ public class CatLaunch : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Finish"))
         {
+            AudioManager.instance.PlayLevelComplete();
             resoult.StopTimer();
             resoult.SaveResoult();
             Destroy(gameObject);
@@ -91,5 +92,9 @@ public class CatLaunch : MonoBehaviour
         isNonVisible = true;
     }
 
+    private void OnBecameVisible()
+    {
+        isNonVisible = false;
+    }
 
 }

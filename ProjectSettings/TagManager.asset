@@ -9,6 +9,7 @@ TagManager:
   - TimeRemover
   - AddTime
   - AID
+  - LevelButton
   layers:
   - Default
   - TransparentFX
